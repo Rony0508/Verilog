@@ -1,6 +1,6 @@
-module MUX1to2_8 (in,select,out1, out2);
+module DEMUX1to2_16(in,select,out1,out2);
 
-parameter N = 8; // default width
+parameter N = 16; // default width
 input select;
 input [N-1:0] in;
 output reg [N-1:0] out1, out2;
