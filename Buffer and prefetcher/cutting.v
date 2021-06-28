@@ -5,15 +5,14 @@ parameter m = 8;
 
 input clk,en;
 input [n-1:0] in;
-output [m-1:0] out;
-reg [m-1:0] out;
+output reg [m-1:0] out;
 
 always @(*)
 begin
 if(en)
-    out[m-1:0]=in[m-1:0];
+    out<={in[m-1:0]};
 else
-    out=0;
+    out<=0;
 end
 
 endmodule
@@ -27,6 +26,8 @@ reg clk,en;
 reg [n-1:0] in;
 
 wire [m-1:0] out;
+
+cutting cutting_tb (clk,en,in,out);
 
 always 
 #1 clk=~clk;
@@ -54,7 +55,7 @@ end
 
 initial 
 begin
-$monitor($time,"in=%d,out=%d",in,out);
+$monitor($time," in=%b,out=%b",in,out);
 #20 $stop;
 end
 

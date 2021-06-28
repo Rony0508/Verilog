@@ -3,15 +3,14 @@ module cutting (clk,en,in,out);
 parameter n = 16;
 parameter m = 8;
 
-input en;
+input clk,en;
 input [n-1:0] in;
-output [m-1:0] out;
-reg [m-1:0] out;
+output reg [m-1:0] out;
 
-always @(posedge clk)
+always @(*)
 begin
 if(en)
-    out<=in[m-1:0];
+    out<={in[m-1:0]};
 else
     out<=0;
 end
@@ -27,6 +26,8 @@ reg clk,en;
 reg [n-1:0] in;
 
 wire [m-1:0] out;
+
+cutting cutting_tb (clk,en,in,out);
 
 always 
 #1 clk=~clk;
