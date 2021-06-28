@@ -38,6 +38,41 @@ out011,out111,out211,out012,out112,out212,out013,out113,out213,out014,out114,out
 ,out038,out138,out238,out041,out141,out241,out042,out142,out242,out043,out143,out243,out044,out144,out244,out045,out145,out245,out046,out146,out246,out047,out147
 ,out247,out048,out148,out248;
 
+
+
+PE PE11 (i011,i111,w011,w111,w211,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out011,out111,out211);                                                              
+PE PE12 (i012,i112,w012,w112,w212,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out012,out112,out212);                                                              
+PE PE13 (i013,i113,w013,w113,w213,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out013,out113,out213);                                                              
+PE PE14 (i014,i114,w014,w114,w214,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out014,out114,out214);                                                              
+PE PE15 (i015,i115,w015,w115,w215,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out015,out115,out215);                                                              
+PE PE16 (i016,i116,w016,w116,w216,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out016,out116,out216);                                                              
+PE PE17 (i017,i117,w017,w117,w217,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out017,out117,out217);                                                              
+PE PE18 (i018,i118,w018,w118,w218,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out018,out118,out218);                                                              
+PE PE21 (i021,i121,w021,w121,w221,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out021,out121,out221);                                                              
+PE PE22 (i022,i122,w022,w122,w222,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out022,out122,out222);                                                              
+PE PE23 (i023,i123,w023,w123,w223,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out023,out123,out223);                                                              
+PE PE24 (i024,i124,w024,w124,w224,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out024,out124,out224);                                                              
+PE PE25 (i025,i125,w025,w125,w225,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out025,out125,out225);                                                              
+PE PE26 (i026,i126,w026,w126,w226,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out026,out126,out226);                                                              
+PE PE27 (i027,i127,w027,w127,w227,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out027,out127,out227);                                                              
+PE PE28 (i028,i128,w028,w128,w228,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out028,out128,out228);  
+PE PE31 (i031,i131,w031,w131,w231,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out031,out131,out231);                                                              
+PE PE32 (i032,i132,w032,w132,w232,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out032,out132,out232);                                                              
+PE PE33 (i033,i133,w033,w133,w233,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out033,out133,out233);                                                              
+PE PE34 (i034,i134,w034,w134,w234,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out034,out134,out234);                                                              
+PE PE35 (i035,i135,w035,w135,w235,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out035,out135,out235);                                                              
+PE PE36 (i036,i136,w036,w136,w236,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out036,out136,out236);                                                              
+PE PE37 (i037,i137,w037,w137,w237,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out037,out137,out237);                                                              
+PE PE38 (i038,i138,w038,w138,w238,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out038,out138,out238);                                                              
+PE PE41 (i041,i141,w041,w141,w241,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out041,out141,out241);                                                              
+PE PE42 (i042,i142,w042,w142,w242,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out042,out142,out242);                                                              
+PE PE43 (i043,i143,w043,w143,w243,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out043,out143,out243);                                                              
+PE PE44 (i044,i144,w044,w144,w244,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out044,out144,out244);                                                              
+PE PE45 (i045,i145,w045,w145,w245,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out045,out145,out245);                                                              
+PE PE46 (i046,i146,w046,w146,w246,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out046,out146,out246);                                                              
+PE PE47 (i047,i147,w047,w147,w247,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out047,out147,out247);                                                              
+PE PE48 (i048,i148,w048,w148,w248,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out048,out148,out248);
+
 //Call PE module
 /*
 PE PE11 (i011,i111,w011,w111,w211,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out11);                                                              
@@ -73,36 +108,5 @@ PE PE46 (i046,i146,w046,w146,w246,select_m0,select_m1,select_m2,select_m3,select
 PE PE47 (i047,i147,w047,w147,w247,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out47);                                                              
 PE PE48 (i048,i148,w048,w148,w248,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out48);   
 */
-PE PE11 (i011,i111,w011,w111,w211,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out011,out111,out211);                                                              
-PE PE12 (i012,i112,w012,w112,w212,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out012,out112,out212);                                                              
-PE PE13 (i013,i113,w013,w113,w213,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out013,out113,out213);                                                              
-PE PE14 (i014,i114,w014,w114,w214,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out014,out114,out214);                                                              
-PE PE15 (i015,i115,w015,w115,w215,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out015,out115,out215);                                                              
-PE PE16 (i016,i116,w016,w116,w216,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out016,out116,out216);                                                              
-PE PE17 (i017,i117,w017,w117,w217,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out017,out117,out217);                                                              
-PE PE18 (i018,i118,w018,w118,w218,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out018,out118,out218);                                                              
-PE PE21 (i021,i121,w021,w121,w221,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out021,out121,out221);                                                              
-PE PE22 (i022,i122,w022,w122,w222,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out022,out122,out222);                                                              
-PE PE23 (i023,i123,w023,w123,w223,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out023,out123,out223);                                                              
-PE PE24 (i024,i124,w024,w124,w224,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out024,out124,out224);                                                              
-PE PE25 (i025,i125,w025,w125,w225,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out025,out125,out225);                                                              
-PE PE26 (i026,i126,w026,w126,w226,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out026,out126,out226);                                                              
-PE PE27 (i027,i127,w027,w127,w227,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out027,out127,out227);                                                              
-PE PE28 (i028,i128,w028,w128,w228,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out028,out128,out228);  
-PE PE31 (i031,i131,w031,w131,w231,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out031,out131,out231);                                                              
-PE PE32 (i032,i132,w032,w132,w232,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out032,out132,out232);                                                              
-PE PE33 (i033,i133,w033,w133,w233,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out033,out133,out233);                                                              
-PE PE34 (i034,i134,w034,w134,w234,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out034,out134,out234);                                                              
-PE PE35 (i035,i135,w035,w135,w235,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out035,out135,out235);                                                              
-PE PE36 (i036,i136,w036,w136,w236,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out036,out136,out236);                                                              
-PE PE37 (i037,i137,w037,w137,w237,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out037,out137,out237);                                                              
-PE PE38 (i038,i138,w038,w138,w238,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out038,out138,out238);                                                              
-PE PE41 (i041,i141,w041,w141,w241,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out041,out141,out241);                                                              
-PE PE42 (i042,i142,w042,w142,w242,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out042,out142,out242);                                                              
-PE PE43 (i043,i143,w043,w143,w243,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out043,out143,out243);                                                              
-PE PE44 (i044,i144,w044,w144,w244,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out044,out144,out244);                                                              
-PE PE45 (i045,i145,w045,w145,w245,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out045,out145,out245);                                                              
-PE PE46 (i046,i146,w046,w146,w246,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out046,out146,out246);                                                              
-PE PE47 (i047,i147,w047,w147,w247,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out047,out147,out247);                                                              
-PE PE48 (i048,i148,w048,w148,w248,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out048,out148,out248);
+
 endmodule
