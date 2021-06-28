@@ -3,17 +3,17 @@ module cutting (clk,en,in,out);
 parameter n = 16;
 parameter m = 8;
 
-input clk,en;
+input en;
 input [n-1:0] in;
 output [m-1:0] out;
 reg [m-1:0] out;
 
-always @(*)
+always @(posedge clk)
 begin
 if(en)
-    out[m-1:0]=in[m-1:0];
+    out<=in[m-1:0];
 else
-    out=0;
+    out<=0;
 end
 
 endmodule
