@@ -280,6 +280,12 @@ endmodule
 
 /*
 雞雞備用
+
+
+
+
+
+
 MUX2to1 pe11_input_mux(pe11_out,bn11_out,buf_input_select,pe11_out111);
 MUX2to1 pe12_input_mux(pe12_out,bn12_out,buf_input_select,pe12_out112);
 MUX2to1 pe13_input_mux(pe13_out,bn13_out,buf_input_select,pe13_out113);
