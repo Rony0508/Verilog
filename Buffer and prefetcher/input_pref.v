@@ -1,5 +1,6 @@
 module input_pref(
-en_cutting0,mode_selector
+en_cutting0,mode_selector,mode_selector_output
+
 ,en,clk,reset_n,buf_select
 
 pe11_third_in,pe12_third_in,pe13_third_in,pe14_third_in, pe15_third_in,pe16_third_in,pe17_third_in
@@ -30,6 +31,7 @@ parameter N = 8;
 
 input en,clk,reset_n,buf_select;
 input [1:0] mode_selector;
+input [2:0] mode_selector_output;
 input en_cutting0;
 //come from input buffer
 input [N-1:0]
@@ -52,7 +54,13 @@ input_pref_in011,input_pref_in012,input_pref_in013,input_pref_in014,input_pref_i
 /*
 //come from output buffer 1
 input [N-1:0]
-
+input_pref_in111,input_pref_in112,input_pref_in113,input_pref_in114,input_pref_in115
+,input_pref_in116,input_pref_in117,input_pref_in118,input_pref_in121,input_pref_in122
+,input_pref_in123,input_pref_in124,input_pref_in125,input_pref_in126,input_pref_in127
+,input_pref_in128,input_pref_in131,input_pref_in132,input_pref_in133,input_pref_in134
+,input_pref_in135,input_pref_in136,input_pref_in137,input_pref_in138,input_pref_in141
+,input_pref_in142,input_pref_in143,input_pref_in144,input_pref_in145,input_pref_in146
+,input_pref_in147,input_pref_in148;
 
 */
 
@@ -74,6 +82,11 @@ cutting_out011,cutting_out012,cutting_out013,cutting_out014,cutting_out015,cutti
 ,cutting_out041,cutting_out042,cutting_out043,cutting_out044,cutting_out045,cutting_out046
 ,cutting_out047,cutting_out048;
 
+wire [N-1:0]
+cutting_out111,
+
+
+
 //before parity
 wire [N-1:0]
 parity11,parity12,parity13,parity14,parity15,parity16,parity17,parity18,parity21
@@ -88,6 +101,15 @@ unparity11,unparity12,unparity13,unparity14,unparity15,unparity16,unparity17,unp
 ,unparity31,unparity32,unparity33,unparity34,unparity35,unparity36,unparity37,unparity38
 ,unparity41,unparity42,unparity43,unparity44,unparity45,unparity46,unparity47,unparity48;
 
+//odd and even 
+wire [N-1:0]
+odd11,odd12,odd13,odd14,odd15,odd16,odd17,odd18,odd21,odd22,odd23,odd24
+,odd25,odd26,odd27,odd28,odd31,odd32,odd33,odd34,odd35,odd36,odd37,odd38
+,odd41,odd42,odd43,odd44,odd45,odd46,odd47,odd48;
+wire [N-1:0]
+even11,even12,even13,even14,even15,even16,even17,even18,even21,even22,even23
+,even24,even25,even26,even27,even28,even31,even32,even33,even34,even35,even36
+,even37,even38,even41,even42,even43,even44,even45,even46,even47,even48;
 
 /*---------------------------------------------------------------------------------*/
 //將16bit資料擷取成8 bit fixed point
@@ -162,6 +184,12 @@ cutting output_buf148(clk,en_cutting1,input_pref_in148,cutting_out148);
 /*---------------------------------------------------------------------------------*/
 //Port Mux2t02
 MUX2to2_8bit MUX2to2_8bit11 (mode_selector,pe11_third_in,cutting_out011,parity11,unparity11);
+MUX2to2_8bit MUX2to2_8bit12 (mode_selector,pe12_third_in,cutting_out012,parity12,unparity12);
+MUX2to2_8bit MUX2to2_8bit13 (mode_selector,pe13_third_in,cutting_out013,parity13,unparity13);
+MUX2to2_8bit MUX2to2_8bit14 (mode_selector,pe14_third_in,cutting_out014,parity14,unparity14);
+MUX2to2_8bit MUX2to2_8bit15 (mode_selector,pe15_third_in,cutting_out015,parity15,unparity15);
+MUX2to2_8bit MUX2to2_8bit16 (mode_selector,pe16_third_in,cutting_out016,parity16,unparity16);
+MUX2to2_8bit MUX2to2_8bit17 (mode_selector,pe17_third_in,cutting_out017,parity17,unparity17);
 MUX2to2_8bit MUX2to2_8bit18(mode_selector,pe18_third_in,cutting_out018,parity18,unparity18);
 MUX2to2_8bit MUX2to2_8bit21(mode_selector,pe21_third_in,cutting_out021,parity21,unparity21);
 MUX2to2_8bit MUX2to2_8bit22(mode_selector,pe22_third_in,cutting_out022,parity22,unparity22);
@@ -189,15 +217,49 @@ MUX2to2_8bit MUX2to2_8bit47(mode_selector,pe47_third_in,cutting_out047,parity47,
 MUX2to2_8bit MUX2to2_8bit48(mode_selector,pe48_third_in,cutting_out048,parity48,unparity48);
 
 /*---------------------------------------------------------------------------------*/
+//parity
+DEMUX1to2_8bit parity11 (parity11,parity_counter,odd11,even11);
+DEMUX1to2_8bit parity12 (parity12,parity_counter,odd12,even12);
+DEMUX1to2_8bit parity13 (parity13,parity_counter,odd13,even13);
+DEMUX1to2_8bit parity14 (parity14,parity_counter,odd14,even14);
+DEMUX1to2_8bit parity15 (parity15,parity_counter,odd15,even15);
+DEMUX1to2_8bit parity16 (parity16,parity_counter,odd16,even16);
+DEMUX1to2_8bit parity17 (parity17,parity_counter,odd17,even17);
+DEMUX1to2_8bit parity18 (parity18,parity_counter,odd18,even18);
+DEMUX1to2_8bit parity21 (parity21,parity_counter,odd21,even21);
+DEMUX1to2_8bit parity22 (parity22,parity_counter,odd22,even22);
+DEMUX1to2_8bit parity23 (parity23,parity_counter,odd23,even23);
+DEMUX1to2_8bit parity24 (parity24,parity_counter,odd24,even24);
+DEMUX1to2_8bit parity25 (parity25,parity_counter,odd25,even25);
+DEMUX1to2_8bit parity26 (parity26,parity_counter,odd26,even26);
+DEMUX1to2_8bit parity27 (parity27,parity_counter,odd27,even27);
+DEMUX1to2_8bit parity28 (parity28,parity_counter,odd28,even28);
+DEMUX1to2_8bit parity31 (parity31,parity_counter,odd31,even31);
+DEMUX1to2_8bit parity32 (parity32,parity_counter,odd32,even32);
+DEMUX1to2_8bit parity33 (parity33,parity_counter,odd33,even33);
+DEMUX1to2_8bit parity34 (parity34,parity_counter,odd34,even34);
+DEMUX1to2_8bit parity35 (parity35,parity_counter,odd35,even35);
+DEMUX1to2_8bit parity36 (parity36,parity_counter,odd36,even36);
+DEMUX1to2_8bit parity37 (parity37,parity_counter,odd37,even37);
+DEMUX1to2_8bit parity38 (parity38,parity_counter,odd38,even38);
+DEMUX1to2_8bit parity41 (parity41,parity_counter,odd41,even41);
+DEMUX1to2_8bit parity42 (parity42,parity_counter,odd42,even42);
+DEMUX1to2_8bit parity43 (parity43,parity_counter,odd43,even43);
+DEMUX1to2_8bit parity44 (parity44,parity_counter,odd44,even44);
+DEMUX1to2_8bit parity45 (parity45,parity_counter,odd45,even45);
+DEMUX1to2_8bit parity46 (parity46,parity_counter,odd46,even46);
+DEMUX1to2_8bit parity47 (parity47,parity_counter,odd47,even47);
+DEMUX1to2_8bit parity48 (parity48,parity_counter,odd48,even48);
+
+
+/*---------------------------------------------------------------------------------*/
+//before input_pref output we need to select the mode that we need to 
+mode_input_selector mode_input_selector11(mode_selector_output,even11,odd11,unparity11,cutting_out111,i011,i111);
 
 
 
 
-
-
-
-
-
+/*---------------------------------------------------------------------------------*/
 
 
 endmodule
