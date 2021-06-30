@@ -4,9 +4,9 @@ parameter N = 8;
 
 reg [N-1:0] i0,i1,w0,w1,w2;
 reg select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk;
-wire [2*N-1:0] out;
+wire [2*N-1:0] out0,out1,out2;
 
-PE pe(i0,i1,w0,w1,w2,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out);
+PE pe(i0,i1,w0,w1,w2,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out0,out1,out2);
 //clk reset
 initial 
 begin
@@ -39,7 +39,7 @@ end
 initial
 begin
 $monitor($time,"i0=%d,i1=%d,w0=%d,w1=%d,w2=%d,select_m0=%b,select_m1=%b,select_m2=%b,select_m3=%b,select0=%b,select1=%b,out=%d",
-i0,i1,w0,w1,w2,select_m0,select_m1,select_m2,select_m3,select0,select1,out);
+i0,i1,w0,w1,w2,select_m0,select_m1,select_m2,select_m3,select0,select1,out2);
 #50 $stop;
 end
 

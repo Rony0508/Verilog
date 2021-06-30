@@ -1,6 +1,10 @@
 module ACC_tb;
 
 parameter N = 8;
+//Select and reset,clk
+reg clk,reset_n,pe_rst_n,in,stride;
+wire select_m0,select_m1,select_m2,select0,select1,en;
+wire [1:0]conv_curr_state,conv_next_state,fc_curr_state,fc_next_state;
 //Port
 reg [N-1:0]
 //input
@@ -10,16 +14,56 @@ i011,i012,i013,i014,i015,i016,i017,i018,i021,i022,i023,i024,i025,i026,i027,i028,
 ,w011,w012,w013,w014,w015,w016,w017,w018,w021,w022,w023,w024,w025,w026,w027,w028,w031,w032,w033,w034,w035,w036,w037,w038,w041,w042,w043,w044,w045,w046,w047,w048
 ,w111,w112,w113,w114,w115,w116,w117,w118,w121,w122,w123,w124,w125,w126,w127,w128,w131,w132,w133,w134,w135,w136,w137,w138,w141,w142,w143,w144,w145,w146,w147,w148
 ,w211,w212,w213,w214,w215,w216,w217,w218,w221,w222,w223,w224,w225,w226,w227,w228,w231,w232,w233,w234,w235,w236,w237,w238,w241,w242,w243,w244,w245,w246,w247,w248;
-//
-//Select and reset,clk
-
-
+//SA output
 wire [2*N-1:0] 
 out011,out111,out211,out012,out112,out212,out013,out113,out213,out014,out114,out214,out015,out115,out215,out016,out116,out216,out017,out117,out217,out018,out118
 ,out218,out021,out121,out221,out022,out122,out222,out023,out123,out223,out024,out124,out224,out025,out125,out225,out026,out126,out226,out027,out127,out227,out028
 ,out128,out228,out031,out131,out231,out032,out132,out232,out033,out133,out233,out034,out134,out234,out035,out135,out235,out036,out136,out236,out037,out137,out237
 ,out038,out138,out238,out041,out141,out241,out042,out142,out242,out043,out143,out243,out044,out144,out244,out045,out145,out245,out046,out146,out246,out047,out147
 ,out247,out048,out148,out248;
+
+//input buffer0's output
+wire [N-1:0]
+pe11_third_in0,pe12_third_in0,pe13_third_in0,pe14_third_in0, pe15_third_in0,pe16_third_in0,pe17_third_in0
+,pe18_third_in0,pe21_third_in0, pe22_third_in0,pe23_third_in0,pe24_third_in0, pe25_third_in0,pe26_third_in0,pe27_third_in0
+,pe28_third_in0,pe31_third_in0, pe32_third_in0,pe33_third_in0, pe34_third_in0, pe35_third_in0
+,pe36_third_in0,pe37_third_in0,pe38_third_in0,pe41_third_in0,pe42_third_in0,pe43_third_in0
+,pe44_third_in0, pe45_third_in0,pe46_third_in0,pe47_third_in0,pe48_third_in0;
+
+//input buffer1's output
+wire [N-1:0]
+pe11_third_in1,pe12_third_in1,pe13_third_in1,pe14_third_in1, pe15_third_in1,pe16_third_in1,pe17_third_in1
+,pe18_third_in1,pe21_third_in1, pe22_third_in1,pe23_third_in1,pe24_third_in1, pe25_third_in1,pe26_third_in1,pe27_third_in1
+,pe28_third_in1,pe31_third_in1, pe32_third_in1,pe33_third_in1, pe34_third_in1, pe35_third_in1
+,pe36_third_in1,pe37_third_in1,pe38_third_in1,pe41_third_in1,pe42_third_in1,pe43_third_in1
+,pe44_third_in1, pe45_third_in1,pe46_third_in1,pe47_third_in1,pe48_third_in1;
+
+//weight buffer0's output
+wire [N-1:0]
+pe11_third_weight0,pe12_third_weight0,pe13_third_weight0,pe14_third_weight0, pe15_third_weight0,pe16_third_weight0,pe17_third_weight0
+,pe18_third_weight0,pe21_third_weight0, pe22_third_weight0,pe23_third_weight0,pe24_third_weight0, pe25_third_weight0,pe26_third_weight0,pe27_third_weight0
+,pe28_third_weight0,pe31_third_weight0, pe32_third_weight0,pe33_third_weight0, pe34_third_weight0, pe35_third_weight0
+,pe36_third_weight0,pe37_third_weight0,pe38_third_weight0,pe41_third_weight0,pe42_third_weight0,pe43_third_weight0
+,pe44_third_weight0, pe45_third_weight0,pe46_third_weight0,pe47_third_weight0,pe48_third_weight0;
+
+//weight buffer1's output
+wire [N-1:0]
+pe11_third_weight1,pe12_third_weight1,pe13_third_weight1,pe14_third_weight1, pe15_third_weight1,pe16_third_weight1,pe17_third_weight1
+,pe18_third_weight1,pe21_third_weight1, pe22_third_weight1,pe23_third_weight1,pe24_third_weight1, pe25_third_weight1,pe26_third_weight1,pe27_third_weight1
+,pe28_third_weight1,pe31_third_weight1, pe32_third_weight1,pe33_third_weight1, pe34_third_weight1, pe35_third_weight1
+,pe36_third_weight1,pe37_third_weight1,pe38_third_weight1,pe41_third_weight1,pe42_third_weight1,pe43_third_weight1
+,pe44_third_weight1, pe45_third_weight1,pe46_third_weight1,pe47_third_weight1,pe48_third_weight1;
+
+//weight buffer2's output
+wire [N-1:0]
+pe11_third_weight2,pe12_third_weight2,pe13_third_weight2,pe14_third_weight2, pe15_third_weight2,pe16_third_weight2,pe17_third_weight2
+,pe18_third_weight2,pe21_third_weight2, pe22_third_weight2,pe23_third_weight2,pe24_third_weight2, pe25_third_weight2,pe26_third_weight2,pe27_third_weight2
+,pe28_third_weight2,pe31_third_weight2, pe32_third_weight2,pe33_third_weight2, pe34_third_weight2, pe35_third_weight2
+,pe36_third_weight2,pe37_third_weight2,pe38_third_weight2,pe41_third_weight2,pe42_third_weight2,pe43_third_weight2
+,pe44_third_weight2, pe45_third_weight2,pe46_third_weight2,pe47_third_weight2,pe48_third_weight2;
+
+//Output buffer0's output
+
 wire [2*N-1:0]
 pe11_third_out,pe12_third_out,pe13_third_out,pe14_third_out, pe15_third_out,pe16_third_out,pe17_third_out
 ,pe18_third_out,pe21_third_out, pe22_third_out,pe23_third_out,pe24_third_out, pe25_third_out,pe26_third_out,pe27_third_out
@@ -27,17 +71,55 @@ pe11_third_out,pe12_third_out,pe13_third_out,pe14_third_out, pe15_third_out,pe16
 ,pe36_third_out,pe37_third_out,pe38_third_out,pe41_third_out,pe42_third_out,pe43_third_out
 ,pe44_third_out, pe45_third_out,pe46_third_out,pe47_third_out,pe48_third_out;
 
-reg clk,reset_n,pe_rst_n,in,stride;
-wire select_m0,select_m1,select_m2,select0,select1,en;
-wire [1:0]conv_curr_state,conv_next_state,fc_curr_state,fc_next_state;
+
+wire [2*N-1:0]
+bn11_out,bn12_out,bn13_out,bn14_out,bn15_out,bn16_out,bn17_out,bn18_out
+,bn21_out,bn22_out,bn23_out,bn24_out,bn25_out,bn26_out,bn27_out,bn28_out
+,bn31_out,bn32_out,bn33_out,bn34_out,bn35_out,bn36_out,bn37_out,bn38_out
+,bn41_out,bn42_out,bn43_out,bn44_out,bn45_out,bn46_out,bn47_out,bn48_out;
+wire [2*N-1:0]
+input_pref_in011,weight_pref011,input_pref_in012,weight_pref012,input_pref_in013
+,weight_pref013,input_pref_in014,weight_pref014,input_pref_in015,weight_pref015,input_pref_in016
+,weight_pref016,input_pref_in017,weight_pref017,input_pref_in018,weight_pref018,input_pref_in021
+,weight_pref021,input_pref_in022,weight_pref022,input_pref_in023,weight_pref023,input_pref_in024
+,weight_pref024,input_pref_in025,weight_pref025,input_pref_in026,weight_pref026,input_pref_in027
+,weight_pref027,input_pref_in028,weight_pref028,input_pref_in031,weight_pref031,input_pref_in032
+,weight_pref032,input_pref_in033,weight_pref033,input_pref_in034,weight_pref034,input_pref_in035
+,weight_pref035,input_pref_in036,weight_pref036,input_pref_in037,weight_pref037,input_pref_in038
+,weight_pref038,input_pref_in041,weight_pref041,input_pref_in042,weight_pref042,input_pref_in043
+,weight_pref043,input_pref_in044,weight_pref044,input_pref_in045,weight_pref045,input_pref_in046
+,weight_pref046,input_pref_in047,weight_pref047,input_pref_in048,weight_pref048;
+/*-----------------------------------------------*/
+
+/*---------------------Call Module-------------------------*/
 FSM fsm1(clk,reset_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,en);
 SA sa1(//input
-i011,i012,i013,i014,i015,i016,i017,i018,i021,i022,i023,i024,i025,i026,i027,i028,i031,i032,i033,i034,i035,i036,i037,i038,i041,i042,i043,i044,i045,i046,i047,i048
-,i111,i112,i113,i114,i115,i116,i117,i118,i121,i122,i123,i124,i125,i126,i127,i128,i131,i132,i133,i134,i135,i136,i137,i138,i141,i142,i143,i144,i145,i146,i147,i148
+pe11_third_in0,pe12_third_in0,pe13_third_in0,pe14_third_in0, pe15_third_in0,pe16_third_in0,pe17_third_in0
+,pe18_third_in0,pe21_third_in0, pe22_third_in0,pe23_third_in0,pe24_third_in0, pe25_third_in0,pe26_third_in0,pe27_third_in0
+,pe28_third_in0,pe31_third_in0, pe32_third_in0,pe33_third_in0, pe34_third_in0, pe35_third_in0
+,pe36_third_in0,pe37_third_in0,pe38_third_in0,pe41_third_in0,pe42_third_in0,pe43_third_in0
+,pe44_third_in0, pe45_third_in0,pe46_third_in0,pe47_third_in0,pe48_third_in0
+,pe11_third_in1,pe12_third_in1,pe13_third_in1,pe14_third_in1, pe15_third_in1,pe16_third_in1,pe17_third_in1
+,pe18_third_in1,pe21_third_in1, pe22_third_in1,pe23_third_in1,pe24_third_in1, pe25_third_in1,pe26_third_in1,pe27_third_in1
+,pe28_third_in1,pe31_third_in1, pe32_third_in1,pe33_third_in1, pe34_third_in1, pe35_third_in1
+,pe36_third_in1,pe37_third_in1,pe38_third_in1,pe41_third_in1,pe42_third_in1,pe43_third_in1
+,pe44_third_in1, pe45_third_in1,pe46_third_in1,pe47_third_in1,pe48_third_in1
 //weight
-,w011,w012,w013,w014,w015,w016,w017,w018,w021,w022,w023,w024,w025,w026,w027,w028,w031,w032,w033,w034,w035,w036,w037,w038,w041,w042,w043,w044,w045,w046,w047,w048
-,w111,w112,w113,w114,w115,w116,w117,w118,w121,w122,w123,w124,w125,w126,w127,w128,w131,w132,w133,w134,w135,w136,w137,w138,w141,w142,w143,w144,w145,w146,w147,w148
-,w211,w212,w213,w214,w215,w216,w217,w218,w221,w222,w223,w224,w225,w226,w227,w228,w231,w232,w233,w234,w235,w236,w237,w238,w241,w242,w243,w244,w245,w246,w247,w248
+,pe11_third_weight0,pe12_third_weight0,pe13_third_weight0,pe14_third_weight0, pe15_third_weight0,pe16_third_weight0,pe17_third_weight0
+,pe18_third_weight0,pe21_third_weight0, pe22_third_weight0,pe23_third_weight0,pe24_third_weight0, pe25_third_weight0,pe26_third_weight0,pe27_third_weight0
+,pe28_third_weight0,pe31_third_weight0, pe32_third_weight0,pe33_third_weight0, pe34_third_weight0, pe35_third_weight0
+,pe36_third_weight0,pe37_third_weight0,pe38_third_weight0,pe41_third_weight0,pe42_third_weight0,pe43_third_weight0
+,pe44_third_weight0, pe45_third_weight0,pe46_third_weight0,pe47_third_weight0,pe48_third_weight0
+,pe11_third_weight1,pe12_third_weight1,pe13_third_weight1,pe14_third_weight1, pe15_third_weight1,pe16_third_weight1,pe17_third_weight1
+,pe18_third_weight1,pe21_third_weight1, pe22_third_weight1,pe23_third_weight1,pe24_third_weight1, pe25_third_weight1,pe26_third_weight1,pe27_third_weight1
+,pe28_third_weight1,pe31_third_weight1, pe32_third_weight1,pe33_third_weight1, pe34_third_weight1, pe35_third_weight1
+,pe36_third_weight1,pe37_third_weight1,pe38_third_weight1,pe41_third_weight1,pe42_third_weight1,pe43_third_weight1
+,pe44_third_weight1, pe45_third_weight1,pe46_third_weight1,pe47_third_weight1,pe48_third_weight1
+,pe11_third_weight2,pe12_third_weight2,pe13_third_weight2,pe14_third_weight2, pe15_third_weight2,pe16_third_weight2,pe17_third_weight2
+,pe18_third_weight2,pe21_third_weight2, pe22_third_weight2,pe23_third_weight2,pe24_third_weight2, pe25_third_weight2,pe26_third_weight2,pe27_third_weight2
+,pe28_third_weight2,pe31_third_weight2, pe32_third_weight2,pe33_third_weight2, pe34_third_weight2, pe35_third_weight2
+,pe36_third_weight2,pe37_third_weight2,pe38_third_weight2,pe41_third_weight2,pe42_third_weight2,pe43_third_weight2
+,pe44_third_weight2, pe45_third_weight2,pe46_third_weight2,pe47_third_weight2,pe48_third_weight2
 //output
 ,out011,out111,out211,out012,out112,out212,out013,out113,out213,out014,out114,out214,out015,out115,out215,out016,out116,out216,out017,out117,out217,out018,out118
 ,out218,out021,out121,out221,out022,out122,out222,out023,out123,out223,out024,out124,out224,out025,out125,out225,out026,out126,out226,out027,out127,out227,out028
@@ -47,7 +129,69 @@ i011,i012,i013,i014,i015,i016,i017,i018,i021,i022,i023,i024,i025,i026,i027,i028,
 //Select and reset,clk
 ,select_m0,select_m1,select_m2,select_m3,select0,select1,pe_rst_n,clk);
 
-output_buf outbuffer(en,clk,reset_n,buf_select,out211, out212, out213, out214, out215, out216, out217, out218
+/*-------------------input0 buffer----------------------------*/
+input_buf inbuffer0(en,clk,reset_n,buf_select,i011,i012,i013,i014,i015,i016,i017,i018,i021,i022,i023,i024,i025
+,i026,i027,i028,i031,i032,i033,i034,i035,i036,i037,i038,i041,i042,i043,i044,i045,i046,i047,i048
+,pe11_third_in0,pe12_third_in0,pe13_third_in0,pe14_third_in0, pe15_third_in0,pe16_third_in0,pe17_third_in0
+,pe18_third_in0,pe21_third_in0, pe22_third_in0,pe23_third_in0,pe24_third_in0, pe25_third_in0,pe26_third_in0,pe27_third_in0
+,pe28_third_in0,pe31_third_in0, pe32_third_in0,pe33_third_in0, pe34_third_in0, pe35_third_in0
+,pe36_third_in0,pe37_third_in0,pe38_third_in0,pe41_third_in0,pe42_third_in0,pe43_third_in0
+,pe44_third_in0, pe45_third_in0,pe46_third_in0,pe47_third_in0,pe48_third_in0);
+/*-------------------input1 buffer----------------------------*/
+input_buf inbuffer1(en,clk,reset_n,buf_select,i111,i112,i113,i114,i115,i116,i117,i118,i121,i122,i123,i124,i125,i126,i127,i128
+,i131,i132,i133,i134,i135,i136,i137,i138,i141,i142,i143,i144,i145,i146,i147,i148
+,pe11_third_in1,pe12_third_in1,pe13_third_in1,pe14_third_in1, pe15_third_in1,pe16_third_in1,pe17_third_in1
+,pe18_third_in1,pe21_third_in1, pe22_third_in1,pe23_third_in1,pe24_third_in1, pe25_third_in1,pe26_third_in1,pe27_third_in1
+,pe28_third_in1,pe31_third_in1, pe32_third_in1,pe33_third_in1, pe34_third_in1, pe35_third_in1
+,pe36_third_in1,pe37_third_in1,pe38_third_in1,pe41_third_in1,pe42_third_in1,pe43_third_in1
+,pe44_third_in1, pe45_third_in1,pe46_third_in1,pe47_third_in1,pe48_third_in1);
+
+/*--------------------weight0 buffer---------------------------*/
+weight_buf weightbuffer0(en,clk,reset_n,buf_select,w011,w012,w013,w014,w015,w016,w017,w018,w021,w022,w023,w024,w025,w026,w027,w028,w031,w032,w033,w034
+,w035,w036,w037,w038,w041,w042,w043,w044,w045,w046,w047,w048
+,pe11_third_weight0,pe12_third_weight0,pe13_third_weight0,pe14_third_weight0, pe15_third_weight0,pe16_third_weight0,pe17_third_weight0
+,pe18_third_weight0,pe21_third_weight0, pe22_third_weight0,pe23_third_weight0,pe24_third_weight0, pe25_third_weight0,pe26_third_weight0,pe27_third_weight0
+,pe28_third_weight0,pe31_third_weight0, pe32_third_weight0,pe33_third_weight0, pe34_third_weight0, pe35_third_weight0
+,pe36_third_weight0,pe37_third_weight0,pe38_third_weight0,pe41_third_weight0,pe42_third_weight0,pe43_third_weight0
+,pe44_third_weight0, pe45_third_weight0,pe46_third_weight0,pe47_third_weight0,pe48_third_weight0);
+/*--------------------weight1 buffer---------------------------*/
+weight_buf weightbuffer1(en,clk,reset_n,buf_select,w111,w112,w113,w114,w115,w116,w117,w118,w121,w122,w123,w124,w125,w126,w127,w128
+,w131,w132,w133,w134,w135,w136,w137,w138,w141,w142,w143,w144,w145,w146,w147,w148
+,pe11_third_weight1,pe12_third_weight1,pe13_third_weight1,pe14_third_weight1, pe15_third_weight1,pe16_third_weight1,pe17_third_weight1
+,pe18_third_weight1,pe21_third_weight1, pe22_third_weight1,pe23_third_weight1,pe24_third_weight1, pe25_third_weight1,pe26_third_weight1,pe27_third_weight1
+,pe28_third_weight1,pe31_third_weight1, pe32_third_weight1,pe33_third_weight1, pe34_third_weight1, pe35_third_weight1
+,pe36_third_weight1,pe37_third_weight1,pe38_third_weight1,pe41_third_weight1,pe42_third_weight1,pe43_third_weight1
+,pe44_third_weight1, pe45_third_weight1,pe46_third_weight1,pe47_third_weight1,pe48_third_weight1);
+/*--------------------weight2 buffer---------------------------*/
+weight_buf weightbuffer2(en,clk,reset_n,buf_select,w211,w212,w213,w214,w215,w216,w217,w218,w221,w222,w223,w224,w225,w226,w227,w228
+,w231,w232,w233,w234,w235,w236,w237,w238,w241,w242,w243,w244,w245,w246,w247,w248
+,pe11_third_weight2,pe12_third_weight2,pe13_third_weight2,pe14_third_weight2, pe15_third_weight2,pe16_third_weight2,pe17_third_weight2
+,pe18_third_weight2,pe21_third_weight2, pe22_third_weight2,pe23_third_weight2,pe24_third_weight2, pe25_third_weight2,pe26_third_weight2,pe27_third_weight2
+,pe28_third_weight2,pe31_third_weight2, pe32_third_weight2,pe33_third_weight2, pe34_third_weight2, pe35_third_weight2
+,pe36_third_weight2,pe37_third_weight2,pe38_third_weight2,pe41_third_weight2,pe42_third_weight2,pe43_third_weight2
+,pe44_third_weight2, pe45_third_weight2,pe46_third_weight2,pe47_third_weight2,pe48_third_weight2);
+
+/*--------------------output0 buffer---------------------------*/
+/*
+output_buf outbuffer0(en,clk,reset_n,buf_input_select,buf_output_select
+,out211,bn11_out,out212,bn12_out,out213,bn13_out,out214,bn14_out,out215,bn15_out,out216,bn16_out,out217,bn17_out,out218,bn18_out
+,out221,bn21_out,out222,bn22_out,out223,bn23_out,out224,bn24_out,out225,bn25_out,out226,bn26_out,out227,bn27_out,out228,bn28_out
+,out231,bn31_out,out232,bn32_out,out233,bn33_out,out234,bn34_out,out235,bn35_out,out236,bn36_out,out237,bn37_out,out238,bn38_out
+,out241,bn41_out,out242,bn42_out,out243,bn43_out,out244,bn44_out,out245,bn45_out,out246,bn46_out,out247,bn47_out,out248,bn48_out
+,input_pref_in011,weight_pref011,input_pref_in012,weight_pref012,input_pref_in013
+,weight_pref013,input_pref_in014,weight_pref014,input_pref_in015,weight_pref015,input_pref_in016
+,weight_pref016,input_pref_in017,weight_pref017,input_pref_in018,weight_pref018,input_pref_in021
+,weight_pref021,input_pref_in022,weight_pref022,input_pref_in023,weight_pref023,input_pref_in024
+,weight_pref024,input_pref_in025,weight_pref025,input_pref_in026,weight_pref026,input_pref_in027
+,weight_pref027,input_pref_in028,weight_pref028,input_pref_in031,weight_pref031,input_pref_in032
+,weight_pref032,input_pref_in033,weight_pref033,input_pref_in034,weight_pref034,input_pref_in035
+,weight_pref035,input_pref_in036,weight_pref036,input_pref_in037,weight_pref037,input_pref_in038
+,weight_pref038,input_pref_in041,weight_pref041,input_pref_in042,weight_pref042,input_pref_in043
+,weight_pref043,input_pref_in044,weight_pref044,input_pref_in045,weight_pref045,input_pref_in046
+,weight_pref046,input_pref_in047,weight_pref047,input_pref_in048,weight_pref048);
+*/
+/*--------------------output1 buffer---------------------------*/
+output_buf outbuffer1(en,clk,reset_n,buf_select,out211, out212, out213, out214, out215, out216, out217, out218
 ,out221,out222,out223,out224,out225,out226,out227,out228
 ,out231,out232,out233, out234, out235, out236, out237,out238
 ,out241,out242,out243,out244,out245,out246,out247,out248
@@ -56,6 +200,7 @@ output_buf outbuffer(en,clk,reset_n,buf_select,out211, out212, out213, out214, o
 ,pe28_third_out,pe31_third_out, pe32_third_out,pe33_third_out, pe34_third_out, pe35_third_out
 ,pe36_third_out,pe37_third_out,pe38_third_out,pe41_third_out,pe42_third_out,pe43_third_out
 ,pe44_third_out, pe45_third_out,pe46_third_out,pe47_third_out,pe48_third_out);
+/*-----------------------------------------------*/
 
 //clk reset
 initial 
@@ -138,7 +283,7 @@ w114=0;w115=0;w116=0;w117=0;w118=0;w121=0;w122=0;w123=0;w124=0;w125=0;w126=0;w12
 w135=0;w136=0;w137=0;w138=0;w141=0;w142=0;w143=0;w144=0;w145=0;w146=0;w147=0;w148=0;w211=0;w212=0;w213=0;w214=0;w215=0;
 w216=0;w217=0;w218=0;w221=0;w222=0;w223=0;w224=0;w225=0;w226=0;w227=0;w228=0;w231=0;w232=0;w233=0;w234=0;w235=0;w236=0;
 w237=0;w238=0;w241=0;w242=0;w243=0;w244=0;w245=0;w246=0;w247=0;w248=0;
-
+/*
 @(posedge clk)
 pe_rst_n=0;
 i011=pe11_third_out;i012=pe12_third_out;i013=pe13_third_out;i014=pe14_third_out;i015=pe15_third_out;i016=pe16_third_out;
@@ -152,6 +297,7 @@ w041=4;w042=3;w043=2;w044=5;w045=1;w046=4;w047=3;w048=2;w111=5;w112=1;w113=4;w11
 w127=2;w128=5;w131=1;w132=4;w133=3;w134=2;w135=5;w136=1;w137=4;w138=3;w141=2;w142=5;w143=1;w144=4;w145=3;w146=2;w147=5;w148=1;w211=4;w212=3;w213=2;w214=5;
 w215=1;w216=4;w217=3;w218=2;w221=5;w222=1;w223=4;w224=3;w225=2;w226=5;w227=1;w228=4;w231=3;w232=2;w233=5;w234=1;w235=4;w236=3;w237=2;w238=5;w241=1;w242=4;
 w243=3;w244=2;w245=5;w246=1;w247=4;w248=3;
+
 @(posedge clk)
 pe_rst_n=1;
 i011=pe11_third_out;i012=pe12_third_out;i013=pe13_third_out;i014=pe14_third_out;i015=pe15_third_out;i016=pe16_third_out;
@@ -179,6 +325,7 @@ w113=4;w114=5;w115=2;w116=1;w117=3;w118=4;w121=5;w122=2;w123=1;w124=3;w125=4;w12
 w134=2;w135=1;w136=3;w137=4;w138=5;w141=2;w142=1;w143=3;w144=4;w145=5;w146=2;w147=1;w148=3;w211=4;w212=5;w213=2;w214=1;
 w215=3;w216=4;w217=5;w218=2;w221=1;w222=3;w223=4;w224=5;w225=2;w226=1;w227=3;w228=4;w231=5;w232=2;w233=1;w234=3;w235=4;
 w236=5;w237=2;w238=1;w241=3;w242=4;w243=5;w244=2;w245=1;w246=3;w247=4;w248=5;
+*/
 
 end
 
