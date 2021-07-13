@@ -16,7 +16,26 @@ module output_buf(en,clk,reset_n,buf_input_select,buf_output_select
 ,weight_pref035,input_pref_in036,weight_pref036,input_pref_in037,weight_pref037,input_pref_in038
 ,weight_pref038,input_pref_in041,weight_pref041,input_pref_in042,weight_pref042,input_pref_in043
 ,weight_pref043,input_pref_in044,weight_pref044,input_pref_in045,weight_pref045,input_pref_in046
-,weight_pref046,input_pref_in047,weight_pref047,input_pref_in048,weight_pref048);
+,weight_pref046,input_pref_in047,weight_pref047,input_pref_in048,weight_pref048
+
+,input_pref_in111,input_pref_in112,input_pref_in113,input_pref_in114,input_pref_in115
+,input_pref_in116,input_pref_in117,input_pref_in118,input_pref_in121,input_pref_in122
+,input_pref_in123,input_pref_in124,input_pref_in125,input_pref_in126,input_pref_in127
+,input_pref_in128,input_pref_in131,input_pref_in132,input_pref_in133,input_pref_in134
+,input_pref_in135,input_pref_in136,input_pref_in137,input_pref_in138,input_pref_in141
+,input_pref_in142,input_pref_in143,input_pref_in144,input_pref_in145,input_pref_in146
+,input_pref_in147,input_pref_in148
+
+,weight_pref111,weight_pref112,weight_pref113,weight_pref114,weight_pref115,weight_pref116
+,weight_pref117,weight_pref118,weight_pref121,weight_pref122,weight_pref123,weight_pref124
+,weight_pref125,weight_pref126,weight_pref127,weight_pref128,weight_pref131,weight_pref132
+,weight_pref133,weight_pref134,weight_pref135,weight_pref136,weight_pref137,weight_pref138
+,weight_pref141,weight_pref142,weight_pref143,weight_pref144,weight_pref145,weight_pref146
+,weight_pref147,weight_pref148;
+
+
+
+);
 /*---------------------------------------------------------------------------------*/
 //變數
 parameter N=16;
@@ -50,10 +69,22 @@ output reg [N-1:0] input_pref_in011,weight_pref011,input_pref_in012,weight_pref0
 ,weight_pref046,input_pref_in047,weight_pref047,input_pref_in048,weight_pref048;
 
 // (1)
+output reg [N-1:0]
+input_pref_in111,input_pref_in112,input_pref_in113,input_pref_in114,input_pref_in115
+,input_pref_in116,input_pref_in117,input_pref_in118,input_pref_in121,input_pref_in122
+,input_pref_in123,input_pref_in124,input_pref_in125,input_pref_in126,input_pref_in127
+,input_pref_in128,input_pref_in131,input_pref_in132,input_pref_in133,input_pref_in134
+,input_pref_in135,input_pref_in136,input_pref_in137,input_pref_in138,input_pref_in141
+,input_pref_in142,input_pref_in143,input_pref_in144,input_pref_in145,input_pref_in146
+,input_pref_in147,input_pref_in148;
 
-
-
-
+output reg [N-1:0]
+weight_pref111,weight_pref112,weight_pref113,weight_pref114,weight_pref115,weight_pref116
+,weight_pref117,weight_pref118,weight_pref121,weight_pref122,weight_pref123,weight_pref124
+,weight_pref125,weight_pref126,weight_pref127,weight_pref128,weight_pref131,weight_pref132
+,weight_pref133,weight_pref134,weight_pref135,weight_pref136,weight_pref137,weight_pref138
+,weight_pref141,weight_pref142,weight_pref143,weight_pref144,weight_pref145,weight_pref146
+,weight_pref147,weight_pref148;
 
 
 

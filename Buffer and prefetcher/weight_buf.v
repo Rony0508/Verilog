@@ -1,20 +1,32 @@
-module weight_buf(en,clk,reset_n,buf_select,pe11_weight011,pe12_weight012,pe13_weight013,pe14_weight014,pe15_weight015,pe16_weight016,pe17_weight017,pe18_weight018
-,pe21_weight021,pe22_weight022,pe23_weight023,pe24_weight024,pe25_weight025,pe26_weight026,pe27_weight027,pe28_weight028
-,pe31_weight031,pe32_weight032,pe33_weight033,pe34_weight034,pe35_weight035,pe36_weight036,pe37_weight037,pe38_weight038
-,pe41_weight041,pe42_weight042,pe43_weight043,pe44_weight044,pe45_weight045,pe46_weight046,pe47_weight047,pe48_weight048
-,pe11_third_weight,pe12_third_weight,pe13_third_weight,pe14_third_weight, pe15_third_weight,pe16_third_weight,pe17_third_weight
-,pe18_third_weight,pe21_third_weight, pe22_third_weight,pe23_third_weight,pe24_third_weight, pe25_third_weight,pe26_third_weight,pe27_third_weight
-,pe28_third_weight,pe31_third_weight, pe32_third_weight,pe33_third_weight, pe34_third_weight, pe35_third_weight
-,pe36_third_weight,pe37_third_weight,pe38_third_weight,pe41_third_weight,pe42_third_weight,pe43_third_weight
-,pe44_third_weight, pe45_third_weight,pe46_third_weight,pe47_third_weight,pe48_third_weight);
+module weight_buf(en,clk,reset_n,buf_select
+
+,pe11_weight011,pe12_weight012,pe13_weight013,pe14_weight014,pe15_weight015,pe16_weight016
+,pe17_weight017,pe18_weight018,pe21_weight021,pe22_weight022,pe23_weight023,pe24_weight024
+,pe25_weight025,pe26_weight026,pe27_weight027,pe28_weight028,pe31_weight031,pe32_weight032
+,pe33_weight033,pe34_weight034,pe35_weight035,pe36_weight036,pe37_weight037,pe38_weight038
+,pe41_weight041,pe42_weight042,pe43_weight043,pe44_weight044,pe45_weight045,pe46_weight046
+,pe47_weight047,pe48_weight048
+
+,pe11_third_weight,pe12_third_weight,pe13_third_weight,pe14_third_weight,pe15_third_weight
+,pe16_third_weight,pe17_third_weight,pe18_third_weight,pe21_third_weight,pe22_third_weight
+,pe23_third_weight,pe24_third_weight,pe25_third_weight,pe26_third_weight,pe27_third_weight
+,pe28_third_weight,pe31_third_weight,pe32_third_weight,pe33_third_weight,pe34_third_weight
+,pe35_third_weight,pe36_third_weight,pe37_third_weight,pe38_third_weight,pe41_third_weight
+,pe42_third_weight,pe43_third_weight,pe44_third_weight,pe45_third_weight,pe46_third_weight
+,pe47_third_weight,pe48_third_weight
+
+);
 /*---------------------------------------------------------------------------------*/
 parameter N=8;
 /*---------------------------------------------------------------------------------*/
 input buf_select,reset_n,clk,en;
-input [N-1:0]pe11_weight011,pe12_weight012,pe13_weight013,pe14_weight014, pe15_weight015, pe16_weight016, pe17_weight017, pe18_weight018
-, pe21_weight021,pe22_weight022,pe23_weight023,pe24_weight024, pe25_weight025, pe26_weight026, pe27_weight027, pe28_weight028
-,pe31_weight031,pe32_weight032,pe33_weight033,pe34_weight034, pe35_weight035, pe36_weight036, pe37_weight037, pe38_weight038
-,pe41_weight041,pe42_weight042,pe43_weight043,pe44_weight044, pe45_weight045, pe46_weight046, pe47_weight047, pe48_weight048;
+input [N-1:0]
+pe11_weight011,pe12_weight012,pe13_weight013,pe14_weight014,pe15_weight015,pe16_weight016
+,pe17_weight017,pe18_weight018,pe21_weight021,pe22_weight022,pe23_weight023,pe24_weight024
+,pe25_weight025,pe26_weight026,pe27_weight027,pe28_weight028,pe31_weight031,pe32_weight032
+,pe33_weight033,pe34_weight034,pe35_weight035,pe36_weight036,pe37_weight037,pe38_weight038
+,pe41_weight041,pe42_weight042,pe43_weight043,pe44_weight044,pe45_weight045,pe46_weight046
+,pe47_weight047,pe48_weight048;
 /*---------------------------------------------------------------------------------*/
 wire [N-1:0]pe11_fir_weight,pe11_sec_weight,pe12_fir_weight,pe12_sec_weight,pe13_fir_weight,pe13_sec_weight, pe14_fir_weight, pe14_sec_weight
 ,pe15_fir_weight,pe15_sec_weight,pe16_fir_weight,pe16_sec_weight,pe17_fir_weight,pe17_sec_weight,pe18_fir_weight,pe18_sec_weight
@@ -25,11 +37,15 @@ wire [N-1:0]pe11_fir_weight,pe11_sec_weight,pe12_fir_weight,pe12_sec_weight,pe13
 ,pe41_fir_weight,pe41_sec_weight,pe42_fir_weight,pe42_sec_weight,pe43_fir_weight,pe43_sec_weight,pe44_fir_weight,pe44_sec_weight
 ,pe45_fir_weight,pe45_sec_weight,pe46_fir_weight,pe46_sec_weight,pe47_fir_weight, pe47_sec_weight,pe48_fir_weight,pe48_sec_weight;
 /*---------------------------------------------------------------------------------*/
-output [N-1:0]pe11_third_weight,pe12_third_weight,pe13_third_weight,pe14_third_weight, pe15_third_weight,pe16_third_weight,pe17_third_weight
-,pe18_third_weight,pe21_third_weight, pe22_third_weight,pe23_third_weight,pe24_third_weight, pe25_third_weight,pe26_third_weight,pe27_third_weight
-,pe28_third_weight,pe31_third_weight, pe32_third_weight,pe33_third_weight, pe34_third_weight, pe35_third_weight
-,pe36_third_weight,pe37_third_weight,pe38_third_weight,pe41_third_weight,pe42_third_weight,pe43_third_weight
-,pe44_third_weight, pe45_third_weight,pe46_third_weight,pe47_third_weight,pe48_third_weight;
+output [N-1:0]
+pe11_third_weight,pe12_third_weight,pe13_third_weight,pe14_third_weight,pe15_third_weight
+,pe16_third_weight,pe17_third_weight,pe18_third_weight,pe21_third_weight,pe22_third_weight
+,pe23_third_weight,pe24_third_weight,pe25_third_weight,pe26_third_weight,pe27_third_weight
+,pe28_third_weight,pe31_third_weight,pe32_third_weight,pe33_third_weight,pe34_third_weight
+,pe35_third_weight,pe36_third_weight,pe37_third_weight,pe38_third_weight,pe41_third_weight
+,pe42_third_weight,pe43_third_weight,pe44_third_weight,pe45_third_weight,pe46_third_weight
+,pe47_third_weight,pe48_third_weight;
+
 /*---------------------------------------------------------------------------------*/
 DFF_en pe11_DFF_en0(en,clk,reset_n,pe11_weight011, pe11_fir_weight);
 DFF_en pe11_DFF_en1(en,clk,reset_n,pe11_fir_weight,pe11_sec_weight);

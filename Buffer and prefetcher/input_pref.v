@@ -51,7 +51,7 @@ pe11_third_in,pe12_third_in,pe13_third_in,pe14_third_in, pe15_third_in,pe16_thir
 ,pe44_third_in, pe45_third_in,pe46_third_in,pe47_third_in,pe48_third_in;
 
 //come from output buffer 0
-input [N-1:0]
+input [2*N-1:0]
 input_pref_in011,input_pref_in012,input_pref_in013,input_pref_in014,input_pref_in015
 ,input_pref_in016,input_pref_in017,input_pref_in018,input_pref_in021,input_pref_in022
 ,input_pref_in023,input_pref_in024,input_pref_in025,input_pref_in026,input_pref_in027
@@ -62,7 +62,7 @@ input_pref_in011,input_pref_in012,input_pref_in013,input_pref_in014,input_pref_i
 
 
 //come from output buffer 1
-input [N-1:0]
+input [2*N-1:0]
 input_pref_in111,input_pref_in112,input_pref_in113,input_pref_in114,input_pref_in115
 ,input_pref_in116,input_pref_in117,input_pref_in118,input_pref_in121,input_pref_in122
 ,input_pref_in123,input_pref_in124,input_pref_in125,input_pref_in126,input_pref_in127
@@ -82,6 +82,7 @@ i011,i012,i013,i014,i015,i016,i017,i018,i021,i022,i023,i024,i025,i026,i027,i028
 ,i131,i132,i133,i134,i135,i136,i137,i138,i141,i142,i143,i144,i145,i146,i147,i148;
 
 /*---------------------------------------------------------------------------------*/
+
 //wire cutting0 to MUX2to2
 wire [N-1:0] 
 cutting_out011,cutting_out012,cutting_out013,cutting_out014,cutting_out015,cutting_out016
@@ -98,8 +99,6 @@ cutting_out111,cutting_out112,cutting_out113,cutting_out114,cutting_out115,cutti
 ,cutting_out133,cutting_out134,cutting_out135,cutting_out136,cutting_out137,cutting_out138
 ,cutting_out141,cutting_out142,cutting_out143,cutting_out144,cutting_out145,cutting_out146
 ,cutting_out147,cutting_out148;
-
-
 
 //before parity
 wire [N-1:0]
