@@ -2,9 +2,9 @@ module FSM_tb;
 
 reg in,clk,rst_n,stride;
 
-wire select_m0,select_m1,select_m2,select_m3,select0,select1;
+wire select_m0,select_m1,select_m2,select_m3,select0,select1,in_en,pe_rst;
 
-FSM fsm(clk,rst_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1);
+FSM fsm(clk,rst_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,in_en,pe_rst);
 initial
 begin
 rst_n=1'b1;
