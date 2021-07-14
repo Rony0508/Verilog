@@ -1,6 +1,6 @@
 module PE (i0,i1,w0,w1,w2,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out0,out1,out2);
 
-parameter N = 8;   
+parameter N = 8; 
 
 input [N-1:0] i0,i1,w0,w1,w2;
 input select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk;
