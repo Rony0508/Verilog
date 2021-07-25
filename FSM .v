@@ -11,9 +11,18 @@ parameter count_num=6;  //clk of in_en counter parameter
 parameter rst_count_num=1; //clk of reset counter parameter
 reg complete;
 reg rst_complete;
-output in_en,pe_rst;
-reg in_en;
-reg pe_rst;
+output reg in_en,pe_rst;
+//ctrl inpref
+output reg [1:0]inpref_mode_selector;
+/*
+inpref_mode_selector=2'b00, first input(no cutting) and stride = 2;
+inpref_mode_selector=2'b01, first input(no cutting) and stride = 1;
+inpref_mode_selector=2'b10, cutting input and stride = 2;
+inpref_mode_selector=2'b11, cutting input and stride = 1;
+*/
+output reg [2:0]inpref_mode_selector_output;
+output reg en_cutting0;
+output reg en_cutting1;
 reg [3:0]count;
 reg [1:0]rst_count;
 reg [2:0]curr_state;
@@ -68,30 +77,21 @@ end
 always@(*)
   case (curr_state)
     IDLE    : begin 
-    select_m2=0;select_m3=0;select0=0;select1=0;in_en=0;complete=0;rst_complete=0;pe_rst=1;
+    select_m2=0;select_m3=0;select0=0;select1=0;in_en=0;complete=0;rst_complete=0;pe_rst=1;en_cutting0=0;en_cutting1=0;
+    inpref_mode_selector=2'b01;inpref_mode_selector_output=3'b000;
 end
 /*--------------------------FP Mode-------------------------------*/
     FP      : begin
-    select_m2=0;select_m3=0;select0=0;select1=1;
+    select_m2=0;select_m3=0;select0=0;select1=1;en_cutting0=1;
 if(stride==0)
     begin
-	select_m0=0;select_m1=0;
+	select_m0=0;select_m1=0;inpref_mode_selector=2'b01;inpref_mode_selector_output=3'b000;
     end
 else
      begin
-	select_m0=1;select_m1=1;
+	select_m0=1;select_m1=1;inpref_mode_selector=2'b00;inpref_mode_selector_output=3'b010;
      end
-/* 
-if(count==count_num)
-begin
-    in_en=0;complete=1;
-end
 
-else
-begin
-    in_en=1;complete=0;
-end
-*/
 //calculate finish
     if(count==count_num)
         begin
@@ -120,23 +120,13 @@ end
     select_m0=0;select_m1=0;select_m2=0;select_m3=0;
 if(stride==0)
     begin
-	select0=0;select1=1;
+	select0=0;select1=1;inpref_mode_selector=2'b11;inpref_mode_selector_output=3'b000;
     end
 else
      begin
-	select0=0;select1=0;
+	select0=0;select1=0;en_cutting1=1;inpref_mode_selector=2'b10;inpref_mode_selector_output=3'b100;
      end
-/*     
-if(count==count_num)
-    begin
-        in_en=0;complete=1;
-    end
 
-else
-    begin
-        in_en=1;complete=0;
-    end
-*/
 //calculate finish
     if(count==count_num)
         begin
@@ -165,24 +155,13 @@ end
     select_m2=1;select_m3=1;select0=1;select1=0;
 if(stride==0)
     begin
-	select_m0=0;select_m1=0;
+	select_m0=0;select_m1=0;inpref_mode_selector=2'b11;inpref_mode_selector_output=3'b001;
     end
 else
-     begin
-	select_m0=1;select_m1=1;
-     end
-
-/*     
-if(count==count_num)
     begin
-        in_en=0;complete=1;
+    select_m0=1;select_m1=1;inpref_mode_selector=2'b10;inpref_mode_selector_output=3'b011;
     end
 
-else
-    begin
-        in_en=1;complete=0;
-    end
-*/
 //calculate finish
     if(count==count_num)
         begin
@@ -210,6 +189,7 @@ end
 
     default : begin
     select_m2=0;select_m3=0;select0=0;select1=0;in_en=0;complete=0;pe_rst=1;
+    inpref_mode_selector=2'b00;inpref_mode_selector_output=3'b000;
     end
 endcase
 
