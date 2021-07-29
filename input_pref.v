@@ -1,5 +1,5 @@
 module input_pref(
-en_cutting0,en_cutting1,mode_selector,mode_selector_output
+en_cutting0,en_cutting1,mode_selector,mode_selector_output,parity_counter
 
 ,en,clk,reset_n,buf_select
 
@@ -41,7 +41,7 @@ input en,clk,reset_n,buf_select;
 input [1:0] mode_selector;
 input [2:0] mode_selector_output;
 input en_cutting0,en_cutting1;
-
+input [1:0] parity_counter;
 //come from input buffer
 input [N-1:0]
 pe11_third_in,pe12_third_in,pe13_third_in,pe14_third_in, pe15_third_in,pe16_third_in,pe17_third_in
@@ -75,7 +75,7 @@ input_pref_in111,input_pref_in112,input_pref_in113,input_pref_in114,input_pref_i
 
 /*---------------------------------------------------------------------------------*/
 //go to SA
-output reg [N-1:0]
+output [N-1:0]
 i011,i012,i013,i014,i015,i016,i017,i018,i021,i022,i023,i024,i025,i026,i027,i028
 ,i031,i032,i033,i034,i035,i036,i037,i038,i041,i042,i043,i044,i045,i046,i047,i048
 ,i111,i112,i113,i114,i115,i116,i117,i118,i121,i122,i123,i124,i125,i126,i127,i128
@@ -195,7 +195,7 @@ cutting output_buf148(clk,en_cutting1,input_pref_in148,cutting_out148);
 
 
 /*---------------------------------------------------------------------------------*/
-//Port Mux2t02
+//Port Mux2to2
 MUX2to2_8bit MUX2to2_8bit11 (mode_selector,pe11_third_in,cutting_out011,parity11,unparity11);
 MUX2to2_8bit MUX2to2_8bit12 (mode_selector,pe12_third_in,cutting_out012,parity12,unparity12);
 MUX2to2_8bit MUX2to2_8bit13 (mode_selector,pe13_third_in,cutting_out013,parity13,unparity13);

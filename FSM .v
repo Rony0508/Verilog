@@ -1,4 +1,5 @@
-module FSM(clk,fsm_rst_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,in_en,pe_rst);
+module FSM(clk,fsm_rst_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,in_en,pe_rst,
+en_cutting0,en_cutting1,inpref_mode_selector,inpref_mode_selector_output,buf_input_select,buf_output_select,curr_state,next_state);
 
 input clk,fsm_rst_n,in,stride;
 output reg select_m0,select_m1,select_m2,select_m3,select0,select1;
@@ -7,12 +8,17 @@ parameter FP=2'b01;
 parameter BP=2'b10;
 parameter WG=2'b11;
 
-parameter count_num=6;  //clk of in_en counter parameter
+parameter count_num=8;  //clk of in_en counter parameter
 parameter rst_count_num=1; //clk of reset counter parameter
 reg complete;
 reg rst_complete;
 output reg in_en,pe_rst;
-//ctrl inpref
+/*ctrl of output buffer  
+buf_input_select = 1 (receive BN's output) =0 (receive SA's output)
+buf_output_select = 1 (output to weight_pref) =0 (output to input_pref)
+*/
+output reg buf_input_select,buf_output_select;
+//ctrl of inpref
 output reg [1:0]inpref_mode_selector;
 /*
 inpref_mode_selector=2'b00, first input(no cutting) and stride = 2;
@@ -23,6 +29,7 @@ inpref_mode_selector=2'b11, cutting input and stride = 1;
 output reg [2:0]inpref_mode_selector_output;
 output reg en_cutting0;
 output reg en_cutting1;
+output [2:0]curr_state,next_state;
 reg [3:0]count;
 reg [1:0]rst_count;
 reg [2:0]curr_state;
@@ -77,12 +84,13 @@ end
 always@(*)
   case (curr_state)
     IDLE    : begin 
-    select_m2=0;select_m3=0;select0=0;select1=0;in_en=0;complete=0;rst_complete=0;pe_rst=1;en_cutting0=0;en_cutting1=0;
+    select_m2=0;select_m3=0;select0=0;select1=0;in_en=0;complete=0;rst_complete=0;pe_rst=0;en_cutting0=0;en_cutting1=0;
+    buf_input_select=0;buf_output_select=0;
     inpref_mode_selector=2'b01;inpref_mode_selector_output=3'b000;
 end
 /*--------------------------FP Mode-------------------------------*/
     FP      : begin
-    select_m2=0;select_m3=0;select0=0;select1=1;en_cutting0=1;
+    select_m2=0;select_m3=0;select0=0;select1=1;en_cutting0=1;pe_rst=1;
 if(stride==0)
     begin
 	select_m0=0;select_m1=0;inpref_mode_selector=2'b01;inpref_mode_selector_output=3'b000;
@@ -93,16 +101,28 @@ else
      end
 
 //calculate finish
-    if(count==count_num)
-        begin
-            in_en=0;complete=1;pe_rst = 0;
-        end
+/*
+if(count==count_num-1)
+        in_en=0;
+else
+        in_en=1;
+if(count==count_num)
+    begin
+        complete=1;pe_rst = 0;
+    end
 
-    else
-        begin
-            in_en=1;complete=0;
-        end
+else
+        complete=0;*/
 
+if(count==count_num)
+    begin
+        in_en=0;complete=1;pe_rst = 0;
+    end
+
+else
+    begin
+        in_en=1;complete=0;
+    end
 //reset finish
     if(rst_count==rst_count_num)
     begin
@@ -128,15 +148,28 @@ else
      end
 
 //calculate finish
-    if(count==count_num)
-        begin
-            in_en=0;complete=1;pe_rst = 0;
-        end
+/*
+if(count==count_num-1)
+        in_en=0;
+else
+        in_en=1;
+if(count==count_num)
+    begin
+        complete=1;pe_rst = 0;
+    end
 
-    else
-        begin
-            in_en=1;complete=0;
-        end
+else
+        complete=0;*/
+
+if(count==count_num)
+    begin
+        in_en=0;complete=1;pe_rst = 0;
+    end
+
+else
+    begin
+        in_en=1;complete=0;
+    end
 
 //reset finish
     if(rst_count==rst_count_num)
@@ -163,16 +196,28 @@ else
     end
 
 //calculate finish
-    if(count==count_num)
-        begin
-            in_en=0;complete=1;pe_rst = 0;
-        end
+/*
+if(count==count_num-1)
+        in_en=0;
+else
+        in_en=1;
+if(count==count_num)
+    begin
+        complete=1;pe_rst = 0;
+    end
 
-    else
-        begin
-            in_en=1;complete=0;
-        end
+else
+        complete=0;*/
 
+if(count==count_num)
+    begin
+        in_en=0;complete=1;pe_rst = 0;
+    end
+
+else
+    begin
+        in_en=1;complete=0;
+    end
 //reset finish
     if(rst_count==rst_count_num)
     begin
