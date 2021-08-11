@@ -1,4 +1,4 @@
-module FSM(clk,fsm_rst_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,in_en,pe_rst,
+module FSM(clk,fsm_rst_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,in_en,out_en,pe_rst,
 en_cutting0,en_cutting1,inpref_mode_selector,inpref_mode_selector_output,buf_input_select,buf_output_select,curr_state,next_state);
 
 input clk,fsm_rst_n,in,stride;
@@ -10,9 +10,10 @@ parameter WG=2'b11;
 
 parameter count_num=8;  //clk of in_en counter parameter
 parameter rst_count_num=1; //clk of reset counter parameter
+parameter out_count_num=5;
 reg complete;
 reg rst_complete;
-output reg in_en,pe_rst;
+output reg in_en,pe_rst,out_en;
 /*ctrl of output buffer  
 buf_input_select = 1 (receive BN's output) =0 (receive SA's output)
 buf_output_select = 1 (output to weight_pref) =0 (output to input_pref)
@@ -32,6 +33,7 @@ output reg en_cutting1;
 output [2:0]curr_state,next_state;
 reg [3:0]count;
 reg [1:0]rst_count;
+reg [2:0]out_count;
 reg [2:0]curr_state;
 reg [2:0]next_state;
 
@@ -78,14 +80,14 @@ end
   endcase
 /*---------------------------------------------------------*/
 
-//Fsm output:PE's mux select
+//Fsm output: Ctrl signal  
 /*---------------------------------------------------------*/
 
 always@(*)
   case (curr_state)
     IDLE    : begin 
     select_m2=0;select_m3=0;select0=0;select1=0;in_en=0;complete=0;rst_complete=0;pe_rst=0;en_cutting0=0;en_cutting1=0;
-    buf_input_select=0;buf_output_select=0;
+    buf_input_select=0;buf_output_select=0;out_en=0;
     inpref_mode_selector=2'b01;inpref_mode_selector_output=3'b000;
 end
 /*--------------------------FP Mode-------------------------------*/
@@ -121,7 +123,8 @@ if(count==count_num)
 
 else
     begin
-        in_en=1;complete=0;
+        in_en=1;
+        complete=0;
     end
 //reset finish
     if(rst_count==rst_count_num)
@@ -134,6 +137,12 @@ else
     begin
         rst_complete=0;
     end
+/*
+//output finish
+    if(out_count==out_count_num)
+        out_en=1;
+    else
+        out_en=0;*/
 end
 /*--------------------------BP Mode-------------------------------*/
     BP	    : begin 
@@ -182,6 +191,12 @@ else
     begin
         rst_complete=0;
     end
+    /*
+//output finish
+    if(out_count==out_count_num)
+        out_en=1;
+    else
+        out_en=0;*/
 end
 /*--------------------------WG Mode-------------------------------*/
     WG      : begin 
@@ -229,7 +244,12 @@ else
     begin
         rst_complete=0;
     end
-
+    /*
+//output finish
+    if(out_count==out_count_num)
+        out_en=1;
+    else
+        out_en=0;*/
 end
 
     default : begin
@@ -264,7 +284,7 @@ end
 /*---------------------------------------------------------*/
 
 always@(posedge clk) begin
-    if(complete)  
+    if(complete)
        begin
 	    if (rst_count==rst_count_num)
 		rst_count <= 0;
@@ -278,7 +298,23 @@ always@(posedge clk) begin
     
 end
 
+//OUTPUT counter
+/*---------------------------------------------------------*/
+
+always@(posedge clk) begin
+    if(curr_state)  
+       begin
+	    if (out_count==out_count_num)
+		out_count <= 0;
+
+        else
+	     begin
+       		out_count <= out_count+1;
+	     end
+       end
+    else  out_count <= 0;
     
+end    
 
 
     

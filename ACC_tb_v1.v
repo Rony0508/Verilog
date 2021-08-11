@@ -5,7 +5,7 @@ parameter N = 8;
 reg clk,reset_n,in,stride;
 wire pe_rst_n;
 wire [1:0]curr_state,next_state;
-
+reg output_en;
 /*-----------------------------Function's ports declare---------------------------------------*/
 
 
@@ -72,7 +72,7 @@ bn11_out1,bn12_out1,bn13_out1,bn14_out1,bn15_out1,bn16_out1,bn17_out1,bn18_out1
 
 /*-----------------------------Output bufferf's ports declare---------------------------------------*/
 //Output buffer's ctrl signal from fsm
-wire buf_input_select,buf_output_select;
+wire buf_input_select,buf_output_select,out_en;
 
 //Output buffer0's output
 wire [2*N-1:0]
@@ -123,7 +123,7 @@ wire[N-1:0] in011,in012,in013,in014,in015,in016,in017,in018,in021,in022,in023,in
 /*-----------------------------------------------*/
 
 /*---------------------Call Module-------------------------*/
-FSM fsm1(clk,reset_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,en,pe_rst_n
+FSM fsm1(clk,reset_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,en,out_en,pe_rst_n
 ,en_cutting0,en_cutting1,mode_selector,mode_selector_output,buf_input_select,buf_output_select,curr_state,next_state);
 
 SA sa1(//input
@@ -195,7 +195,7 @@ weight_buf weightbuffer2(en,clk,reset_n,buf_select,w211,w212,w213,w214,w215,w216
 
 
 /*--------------------output0 buffer---------------------------*/
-output_buf outbuffer0(en,clk,reset_n,buf_input_select,buf_output_select
+output_buf outbuffer0(output_en,clk,reset_n,buf_input_select,buf_output_select
 
 ,out211,bn11_out0,out212,bn12_out0,out213,bn13_out0,out214,bn14_out0,out215,bn15_out0,out216,bn16_out0,out217,bn17_out0
 ,out218,bn18_out0,out221,bn21_out0,out222,bn22_out0,out223,bn23_out0,out224,bn24_out0,out225,bn25_out0,out226,bn26_out0
@@ -218,7 +218,7 @@ output_buf outbuffer0(en,clk,reset_n,buf_input_select,buf_output_select
 ,weight_pref041,weight_pref042,weight_pref043,weight_pref044,weight_pref045,weight_pref046
 ,weight_pref047,weight_pref048);
 /*--------------------output1 buffer---------------------------*/
-output_buf outbuffer1(en,clk,reset_n,buf_input_select,buf_output_select
+output_buf outbuffer1(output_en,clk,reset_n,buf_input_select,buf_output_select
 
 ,out111,bn11_out1,out112,bn12_out1,out113,bn13_out1,out114,bn14_out1,out115,bn15_out1
 ,out116,bn16_out1,out117,bn17_out1,out118,bn18_out1,out121,bn21_out1,out122,bn22_out1
@@ -319,7 +319,7 @@ bn41_out1<=0;bn42_out1<=0;bn43_out1<=0;bn44_out1<=0;bn45_out1<=0;bn46_out1<=0;bn
 //Set FP/BP stride=1 mode
 reset_n<=1;
 //pe_rst_n<=1;
-in<=1;
+in<=1;output_en<=1;
 //give fp input value
 //give initial input value 
 
