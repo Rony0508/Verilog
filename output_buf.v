@@ -44,7 +44,7 @@ input [N-1:0] pe11_out,bn11_out,pe12_out,bn12_out,pe13_out,bn13_out,pe14_out,bn1
 
 // (0)
 
-output [N-1:0] input_pref_in011,weight_pref011,input_pref_in012,weight_pref012,input_pref_in013
+output  [N-1:0] input_pref_in011,weight_pref011,input_pref_in012,weight_pref012,input_pref_in013
 ,weight_pref013,input_pref_in014,weight_pref014,input_pref_in015,weight_pref015,input_pref_in016
 ,weight_pref016,input_pref_in017,weight_pref017,input_pref_in018,weight_pref018,input_pref_in021
 ,weight_pref021,input_pref_in022,weight_pref022,input_pref_in023,weight_pref023,input_pref_in024
