@@ -12,7 +12,7 @@ parameter parity_counter_num=1;
 parameter count_num=8;  //clk of in_en counter parameter
 parameter fp_count_num=9; // clk of in_en counter when stride=2 
 parameter bp_count_num = 6;
-parameter wg_count_num = 6;
+parameter wg_count_num = 8;
 parameter rst_count_num=1; //clk of reset counter parameter
 reg complete;
 reg rst_complete;
@@ -151,7 +151,7 @@ if(stride==0)
     end
 else
      begin
-	select0=0;select1=0;en_cutting1=1;inpref_mode_selector=2'b10;inpref_mode_selector_output=3'b100;
+	select0=0;select1=0;en_cutting1=1;inpref_mode_selector=2'b11;inpref_mode_selector_output=3'b100;
      end
 
 //calculate finish
@@ -195,11 +195,11 @@ end
     select_m2=1;select_m3=1;select0=1;select1=1;pe_rst=1;
 if(stride==0)
     begin
-	select_m0=1;select_m1=0;inpref_mode_selector=2'b11;inpref_mode_selector_output=3'b001;
+	select_m0=1;select_m1=0;inpref_mode_selector=2'b01;inpref_mode_selector_output=3'b001;
     end
 else
     begin
-    select_m0=0;select_m1=1;inpref_mode_selector=2'b10;inpref_mode_selector_output=3'b011;        
+    select_m0=0;select_m1=1;inpref_mode_selector=2'b00;inpref_mode_selector_output=3'b010;        
     end
 
 //calculate finish

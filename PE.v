@@ -81,11 +81,17 @@ end
 //psum
 assign psum=PSUM;
 //OUT
+/*
 always@(psum)
 begin
 out2<=psum;
 out1<=dff2;
 out0<=dff1;
 end
+*/
+assign out2=psum;
+assign out1=dff2;
+assign out0=dff1;
+
 
 endmodule
