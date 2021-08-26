@@ -1,11 +1,11 @@
-module PE (i0,i1,w0,w1,w2,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out);
+module PE (i0,i1,w0,w1,w2,select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk,out0,out1,out2);
 
 parameter N = 8;   
 
 input [N-1:0] i0,i1,w0,w1,w2;
 input select_m0,select_m1,select_m2,select_m3,select0,select1,reset_n,clk;
 
-output reg [2*N-1:0] out;
+output reg [2*N-1:0] out0,out1,out2;
 
 reg [2*N-1:0] PSUM;
 
@@ -81,9 +81,17 @@ end
 //psum
 assign psum=PSUM;
 //OUT
+/*
 always@(psum)
 begin
-out<=psum;
+out2<=psum;
+out1<=dff2;
+out0<=dff1;
 end
+*/
+assign out2=psum;
+assign out1=dff2;
+assign out0=dff1;
+
 
 endmodule
