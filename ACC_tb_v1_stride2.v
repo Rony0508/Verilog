@@ -18,6 +18,7 @@ i011,i012,i013,i014,i015,i016,i017,i018,i021,i022,i023,i024,i025,i026,i027,i028,
 ,w111,w112,w113,w114,w115,w116,w117,w118,w121,w122,w123,w124,w125,w126,w127,w128,w131,w132,w133,w134,w135,w136,w137,w138,w141,w142,w143,w144,w145,w146,w147,w148
 ,w211,w212,w213,w214,w215,w216,w217,w218,w221,w222,w223,w224,w225,w226,w227,w228,w231,w232,w233,w234,w235,w236,w237,w238,w241,w242,w243,w244,w245,w246,w247,w248;
 //SA output
+wire sa_en;
 wire [2*N-1:0] 
 out011,out111,out211,out012,out112,out212,out013,out113,out213,out014,out114,out214,out015,out115,out215,out016,out116,out216,out017,out117,out217,out018,out118
 ,out218,out021,out121,out221,out022,out122,out222,out023,out123,out223,out024,out124,out224,out025,out125,out225,out026,out126,out226,out027,out127,out227,out028
@@ -127,7 +128,7 @@ wire[N-1:0] in011,in012,in013,in014,in015,in016,in017,in018,in021,in022,in023,in
 
 /*---------------------Call Module-------------------------*/
 FSM fsm1(clk,reset_n,in,stride,select_m0,select_m1,select_m2,select_m3,select0,select1,en,pe_rst_n
-,en_cutting0,en_cutting1,mode_selector,mode_selector_output,buf_input_select,buf_output_select,curr_state,next_state,parity_counter);
+,en_cutting0,en_cutting1,mode_selector,mode_selector_output,buf_input_select,buf_output_select,curr_state,next_state,parity_counter,sa_en);
 
 SA sa1(//input
 in111,in112,in113,in114,in115,in116,in117,in118,in121,in122,in123,in124,in125,in126,in127,in128
@@ -158,7 +159,7 @@ in111,in112,in113,in114,in115,in116,in117,in118,in121,in122,in123,in124,in125,in
 ,out038,out138,out238,out041,out141,out241,out042,out142,out242,out043,out143,out243,out044,out144,out244,out045,out145,out245,out046,out146,out246,out047,out147
 ,out247,out048,out148,out248
 //Select and reset,clk
-,select_m0,select_m1,select_m2,select_m3,select0,select1,pe_rst_n,clk);
+,select_m0,select_m1,select_m2,select_m3,select0,select1,pe_rst_n,clk,sa_en);
 
 
 /*-------------------input buffer----------------------------*/

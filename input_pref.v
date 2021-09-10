@@ -116,6 +116,12 @@ unparity11,unparity12,unparity13,unparity14,unparity15,unparity16,unparity17,unp
 
 //odd and even 
 wire [N-1:0]
+odd_w11,odd_w12,odd_w13,odd_w14,odd_w15,odd_w16,odd_w17,odd_w18,odd_w21
+,odd_w22,odd_w23,odd_w24,odd_w25,odd_w26,odd_w27,odd_w28,odd_w31,odd_w32
+,odd_w33,odd_w34,odd_w35,odd_w36,odd_w37,odd_w38,odd_w41,odd_w42,odd_w43
+,odd_w44,odd_w45,odd_w46,odd_w47,odd_w48;
+
+wire [N-1:0]
 odd11,odd12,odd13,odd14,odd15,odd16,odd17,odd18,odd21,odd22,odd23,odd24
 ,odd25,odd26,odd27,odd28,odd31,odd32,odd33,odd34,odd35,odd36,odd37,odd38
 ,odd41,odd42,odd43,odd44,odd45,odd46,odd47,odd48;
@@ -385,7 +391,8 @@ MUX2to2_8bit MUX2to2_8bit47(mode_selector,pe47_third_in,cutting_out047,parity47,
 MUX2to2_8bit MUX2to2_8bit48(mode_selector,pe48_third_in,cutting_out048,parity48,unparity48);
 
 /*---------------------------------------------------------------------------------*/
-//parity
+//parity 
+/*
 DEMUX1to2_8bit parity_module11 (parity11,parity_counter,odd11,even11);
 DEMUX1to2_8bit parity_module12 (parity12,parity_counter,odd12,even12);
 DEMUX1to2_8bit parity_module13 (parity13,parity_counter,odd13,even13);
@@ -418,8 +425,108 @@ DEMUX1to2_8bit parity_module45 (parity45,parity_counter,odd45,even45);
 DEMUX1to2_8bit parity_module46 (parity46,parity_counter,odd46,even46);
 DEMUX1to2_8bit parity_module47 (parity47,parity_counter,odd47,even47);
 DEMUX1to2_8bit parity_module48 (parity48,parity_counter,odd48,even48);
+*/
 
-
+DEMUX1to2_8bit parity_module11 (parity11,parity_counter,odd_w11,even11);
+DEMUX1to2_8bit parity_module12 (parity12,parity_counter,odd_w12,even12);
+DEMUX1to2_8bit parity_module13 (parity13,parity_counter,odd_w13,even13);
+DEMUX1to2_8bit parity_module14 (parity14,parity_counter,odd_w14,even14);
+DEMUX1to2_8bit parity_module15 (parity15,parity_counter,odd_w15,even15);
+DEMUX1to2_8bit parity_module16 (parity16,parity_counter,odd_w16,even16);
+DEMUX1to2_8bit parity_module17 (parity17,parity_counter,odd_w17,even17);
+DEMUX1to2_8bit parity_module18 (parity18,parity_counter,odd_w18,even18);
+DEMUX1to2_8bit parity_module21 (parity21,parity_counter,odd_w21,even21);
+DEMUX1to2_8bit parity_module22 (parity22,parity_counter,odd_w22,even22);
+DEMUX1to2_8bit parity_module23 (parity23,parity_counter,odd_w23,even23);
+DEMUX1to2_8bit parity_module24 (parity24,parity_counter,odd_w24,even24);
+DEMUX1to2_8bit parity_module25 (parity25,parity_counter,odd_w25,even25);
+DEMUX1to2_8bit parity_module26 (parity26,parity_counter,odd_w26,even26);
+DEMUX1to2_8bit parity_module27 (parity27,parity_counter,odd_w27,even27);
+DEMUX1to2_8bit parity_module28 (parity28,parity_counter,odd_w28,even28);
+DEMUX1to2_8bit parity_module31 (parity31,parity_counter,odd_w31,even31);
+DEMUX1to2_8bit parity_module32 (parity32,parity_counter,odd_w32,even32);
+DEMUX1to2_8bit parity_module33 (parity33,parity_counter,odd_w33,even33);
+DEMUX1to2_8bit parity_module34 (parity34,parity_counter,odd_w34,even34);
+DEMUX1to2_8bit parity_module35 (parity35,parity_counter,odd_w35,even35);
+DEMUX1to2_8bit parity_module36 (parity36,parity_counter,odd_w36,even36);
+DEMUX1to2_8bit parity_module37 (parity37,parity_counter,odd_w37,even37);
+DEMUX1to2_8bit parity_module38 (parity38,parity_counter,odd_w38,even38);
+DEMUX1to2_8bit parity_module41 (parity41,parity_counter,odd_w41,even41);
+DEMUX1to2_8bit parity_module42 (parity42,parity_counter,odd_w42,even42);
+DEMUX1to2_8bit parity_module43 (parity43,parity_counter,odd_w43,even43);
+DEMUX1to2_8bit parity_module44 (parity44,parity_counter,odd_w44,even44);
+DEMUX1to2_8bit parity_module45 (parity45,parity_counter,odd_w45,even45);
+DEMUX1to2_8bit parity_module46 (parity46,parity_counter,odd_w46,even46);
+DEMUX1to2_8bit parity_module47 (parity47,parity_counter,odd_w47,even47);
+DEMUX1to2_8bit parity_module48 (parity48,parity_counter,odd_w48,even48);
+/*
+DEMUX1to2_8bit parity_module11 (en,clk,reset_n,parity11,parity_counter,odd11,even11);
+DEMUX1to2_8bit parity_module12 (en,clk,reset_n,parity12,parity_counter,odd12,even12);
+DEMUX1to2_8bit parity_module13 (en,clk,reset_n,parity13,parity_counter,odd13,even13);
+DEMUX1to2_8bit parity_module14 (en,clk,reset_n,parity14,parity_counter,odd14,even14);
+DEMUX1to2_8bit parity_module15 (en,clk,reset_n,parity15,parity_counter,odd15,even15);
+DEMUX1to2_8bit parity_module16 (en,clk,reset_n,parity16,parity_counter,odd16,even16);
+DEMUX1to2_8bit parity_module17 (en,clk,reset_n,parity17,parity_counter,odd17,even17);
+DEMUX1to2_8bit parity_module18 (en,clk,reset_n,parity18,parity_counter,odd18,even18);
+DEMUX1to2_8bit parity_module21 (en,clk,reset_n,parity21,parity_counter,odd21,even21);
+DEMUX1to2_8bit parity_module22 (en,clk,reset_n,parity22,parity_counter,odd22,even22);
+DEMUX1to2_8bit parity_module23 (en,clk,reset_n,parity23,parity_counter,odd23,even23);
+DEMUX1to2_8bit parity_module24 (en,clk,reset_n,parity24,parity_counter,odd24,even24);
+DEMUX1to2_8bit parity_module25 (en,clk,reset_n,parity25,parity_counter,odd25,even25);
+DEMUX1to2_8bit parity_module26 (en,clk,reset_n,parity26,parity_counter,odd26,even26);
+DEMUX1to2_8bit parity_module27 (en,clk,reset_n,parity27,parity_counter,odd27,even27);
+DEMUX1to2_8bit parity_module28 (en,clk,reset_n,parity28,parity_counter,odd28,even28);
+DEMUX1to2_8bit parity_module31 (en,clk,reset_n,parity31,parity_counter,odd31,even31);
+DEMUX1to2_8bit parity_module32 (en,clk,reset_n,parity32,parity_counter,odd32,even32);
+DEMUX1to2_8bit parity_module33 (en,clk,reset_n,parity33,parity_counter,odd33,even33);
+DEMUX1to2_8bit parity_module34 (en,clk,reset_n,parity34,parity_counter,odd34,even34);
+DEMUX1to2_8bit parity_module35 (en,clk,reset_n,parity35,parity_counter,odd35,even35);
+DEMUX1to2_8bit parity_module36 (en,clk,reset_n,parity36,parity_counter,odd36,even36);
+DEMUX1to2_8bit parity_module37 (en,clk,reset_n,parity37,parity_counter,odd37,even37);
+DEMUX1to2_8bit parity_module38 (en,clk,reset_n,parity38,parity_counter,odd38,even38);
+DEMUX1to2_8bit parity_module41 (en,clk,reset_n,parity41,parity_counter,odd41,even41);
+DEMUX1to2_8bit parity_module42 (en,clk,reset_n,parity42,parity_counter,odd42,even42);
+DEMUX1to2_8bit parity_module43 (en,clk,reset_n,parity43,parity_counter,odd43,even43);
+DEMUX1to2_8bit parity_module44 (en,clk,reset_n,parity44,parity_counter,odd44,even44);
+DEMUX1to2_8bit parity_module45 (en,clk,reset_n,parity45,parity_counter,odd45,even45);
+DEMUX1to2_8bit parity_module46 (en,clk,reset_n,parity46,parity_counter,odd46,even46);
+DEMUX1to2_8bit parity_module47 (en,clk,reset_n,parity47,parity_counter,odd47,even47);
+DEMUX1to2_8bit parity_module48 (en,clk,reset_n,parity48,parity_counter,odd48,even48);
+*/
+/*---------------------------------------------------------------------------------*/
+//Delay dff for odd inputs
+DFF_en odd_delay11 (en,clk,reset_n,odd_w11,odd11);
+DFF_en odd_delay12 (en,clk,reset_n,odd_w12,odd12);
+DFF_en odd_delay13 (en,clk,reset_n,odd_w13,odd13);
+DFF_en odd_delay14 (en,clk,reset_n,odd_w14,odd14);
+DFF_en odd_delay15 (en,clk,reset_n,odd_w15,odd15);
+DFF_en odd_delay16 (en,clk,reset_n,odd_w16,odd16);
+DFF_en odd_delay17 (en,clk,reset_n,odd_w17,odd17);
+DFF_en odd_delay18 (en,clk,reset_n,odd_w18,odd18);
+DFF_en odd_delay21 (en,clk,reset_n,odd_w21,odd21);
+DFF_en odd_delay22 (en,clk,reset_n,odd_w22,odd22);
+DFF_en odd_delay23 (en,clk,reset_n,odd_w23,odd23);
+DFF_en odd_delay24 (en,clk,reset_n,odd_w24,odd24);
+DFF_en odd_delay25 (en,clk,reset_n,odd_w25,odd25);
+DFF_en odd_delay26 (en,clk,reset_n,odd_w26,odd26);
+DFF_en odd_delay27 (en,clk,reset_n,odd_w27,odd27);
+DFF_en odd_delay28 (en,clk,reset_n,odd_w28,odd28);
+DFF_en odd_delay31 (en,clk,reset_n,odd_w31,odd31);
+DFF_en odd_delay32 (en,clk,reset_n,odd_w32,odd32);
+DFF_en odd_delay33 (en,clk,reset_n,odd_w33,odd33);
+DFF_en odd_delay34 (en,clk,reset_n,odd_w34,odd34);
+DFF_en odd_delay35 (en,clk,reset_n,odd_w35,odd35);
+DFF_en odd_delay36 (en,clk,reset_n,odd_w36,odd36);
+DFF_en odd_delay37 (en,clk,reset_n,odd_w37,odd37);
+DFF_en odd_delay38 (en,clk,reset_n,odd_w38,odd38);
+DFF_en odd_delay41 (en,clk,reset_n,odd_w41,odd41);
+DFF_en odd_delay42 (en,clk,reset_n,odd_w42,odd42);
+DFF_en odd_delay43 (en,clk,reset_n,odd_w43,odd43);
+DFF_en odd_delay44 (en,clk,reset_n,odd_w44,odd44);
+DFF_en odd_delay45 (en,clk,reset_n,odd_w45,odd45);
+DFF_en odd_delay46 (en,clk,reset_n,odd_w46,odd46);
+DFF_en odd_delay47 (en,clk,reset_n,odd_w47,odd47);
+DFF_en odd_delay48 (en,clk,reset_n,odd_w48,odd48);
 /*---------------------------------------------------------------------------------*/
 //before input_pref output we need to select the mode that we need to 
 
